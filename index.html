@@ -93,18 +93,20 @@
   <button onclick="celebrate()">CELEBRATE 🎉</button>
 
   <script>
-    function celebrate() {
-      const video = document.getElementById('shadiVideo');
-      video.style.display = 'block';
-      video.muted = false;
+  function celebrate() {
+  const video = document.getElementById('shadiVideo');
+  video.style.display = 'block';
 
-      video.play().catch((err) => {
-        console.warn("Autoplay with sound failed.", err);
-        alert("Tap the video to play with sound if it doesn't start.");
-      });
+  video.play().then(() => {
+    video.muted = false;
+  }).catch((err) => {
+    console.warn("Autoplay with sound failed:", err);
+    alert("Tap the video to play with sound if it doesn't start.");
+  });
 
-      throwConfetti();
-    }
+  throwConfetti();
+}
+
 
     function throwConfetti() {
       for (let i = 0; i < 40; i++) {
