@@ -1,112 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shadi Mubarak</title>
-    <style>
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: #fff8f0;
-            text-align: center;
-            padding: 20px;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shadi Mubarak</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #fff8f0;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
 
-        h1 {
-            color: #d63384;
-            font-size: 2.5em;
-            margin-top: 20px;
-            animation: bounce 1s infinite alternate;
-        }
+    h1 {
+      color: #d63384;
+      font-size: 2.5em;
+      margin-top: 20px;
+      animation: bounce 1s infinite alternate;
+    }
 
-        h2 {
-            color: #343a40;
-            font-size: 1.5em;
-        }
+    h2 {
+      color: #343a40;
+      font-size: 1.5em;
+    }
 
-        .message {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #495057;
-        }
+    .message {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #495057;
+    }
 
-        video {
-            margin-top: 30px;
-            max-width: 90%;
-            border: 5px dashed #ff6b6b;
-            border-radius: 10px;
-        }
+    video {
+      margin: 30px auto;
+      max-width: 90%;
+      border: 5px dashed #ff6b6b;
+      border-radius: 10px;
+      display: none;
+    }
 
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
-        }
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
 
-        button {
-            margin-top: 30px;
-            padding: 10px 20px;
-            font-size: 1em;
-            background-color: #20c997;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #20c997;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-        button:hover {
-            background-color: #17a2b8;
-        }
+    button:hover {
+      background-color: #17a2b8;
+    }
 
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: red;
-            top: 0;
-            animation: fall 3s linear infinite;
-        }
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: red;
+      top: 0;
+      animation: fall 3s linear infinite;
+      z-index: 999;
+    }
 
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
-    </style>
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <h1>SHADI MUBARAK ZIMZAM</h1>
-    <h2>JAA TUJH KO SUKHI SANSAAR MILEY</h2>
+  <h1>SHADI MUBARAK ZIMZAM</h1>
+  <h2>JAA TUJH KO SUKHI SANSAAR MILEY</h2>
 
-    <div class="message">
-        May your kids grow up to be successful tiktokers <br>
-        💍😂
-    </div>
+  <div class="message">
+    May your kids grow up to be successful tiktokers <br> 💍😂
+  </div>
 
-    <video autoplay muted loop playsinline>
-        <source src="shadi.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+  <video id="shadiVideo" controls loop playsinline>
+    <source src="shadi.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-    <button onclick="throwConfetti()">CELEBRATE 🎉</button>
+  <button onclick="celebrate()">CELEBRATE 🎉</button>
 
-    <script>
-        function throwConfetti() {
-            for (let i = 0; i < 40; i++) {
-                let confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                document.body.appendChild(confetti);
+  <script>
+    function celebrate() {
+      const video = document.getElementById('shadiVideo');
+      video.style.display = 'block';
+      video.muted = false;
 
-                setTimeout(() => {
-                    confetti.remove();
-                }, 4000);
-            }
-        }
-    </script>
+      video.play().catch((err) => {
+        console.warn("Autoplay with sound failed.", err);
+        alert("Tap the video to play with sound if it doesn't start.");
+      });
+
+      throwConfetti();
+    }
+
+    function throwConfetti() {
+      for (let i = 0; i < 40; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 4000);
+      }
+    }
+  </script>
 
 </body>
 </html>
